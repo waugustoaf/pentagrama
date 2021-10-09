@@ -3,4 +3,8 @@ import { Router } from 'express';
 
 export const authenticateRoutes = Router();
 
-authenticateRoutes.post('/sessions', AuthenticateUserController.handle);
+authenticateRoutes.post(
+  '/sessions',
+  AuthenticateUserController.validation(),
+  AuthenticateUserController.handle,
+);

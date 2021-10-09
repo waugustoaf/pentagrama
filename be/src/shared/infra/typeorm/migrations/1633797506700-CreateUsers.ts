@@ -7,7 +7,7 @@ export class CreateUsers1633797506700 implements MigrationInterface {
         name: 'users',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'name', type: 'varchar', isUnique: true },
+          { name: 'username', type: 'varchar', isUnique: true },
           { name: 'password', type: 'varchar' },
           { name: 'created_at', type: 'timestamp', default: 'now()' },
         ],
@@ -15,5 +15,7 @@ export class CreateUsers1633797506700 implements MigrationInterface {
     );
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {}
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('users');
+  }
 }

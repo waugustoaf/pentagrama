@@ -10,7 +10,7 @@ const create = async () => {
   const password = await BCryptHashProvider.generateHash('pentpass');
 
   await connection.query(`
-    INSERT INTO users(id, name, password)
+    INSERT INTO users(id, username, password)
     VALUES ('${id}', 'admin', '${password}')
   `);
 };

@@ -6,4 +6,5 @@ export interface IOfficesRepository {
   findByName(name: string): Promise<Office | undefined>;
   findById(id: string): Promise<Office | undefined>;
   list(): Promise<Office[]>;
+  delete(officeId: string): Promise<void>;
 }

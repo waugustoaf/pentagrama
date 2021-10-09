@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 @Entity('users')
 export class User {
   @PrimaryColumn()
@@ -13,5 +14,11 @@ export class User {
   password: string;
 
   @CreateDateColumn()
-  created_ad: Date;
+  created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

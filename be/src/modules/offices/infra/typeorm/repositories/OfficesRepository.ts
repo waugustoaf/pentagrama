@@ -1,9 +1,9 @@
-import { ICreateOfficeDTO } from '@modules/office/dtos/ICreateOfficeDTO';
-import { IOfficesRepository } from '@modules/office/repositories/IOfficesRepository';
+import { ICreateOfficeDTO } from '@modules/offices/dtos/ICreateOfficeDTO';
+import { IOfficesRepository } from '@modules/offices/repositories/IOfficesRepository';
 import { getRepository, Repository } from 'typeorm';
 import { Office } from '../entities/Office';
 
-class OfficesRepository implements IOfficesRepository {
+export class OfficesRepository implements IOfficesRepository {
   private repository: Repository<Office>;
 
   constructor() {
@@ -35,6 +35,8 @@ class OfficesRepository implements IOfficesRepository {
 
     return offices;
   }
-}
 
-export default new OfficesRepository();
+  async delete(officeId: string): Promise<void> {
+    await this.repository.delete(officeId);
+  }
+}
