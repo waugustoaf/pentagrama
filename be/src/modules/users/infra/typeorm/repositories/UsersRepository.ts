@@ -18,8 +18,8 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async findByName(name: string): Promise<User | undefined> {
-    const user = await this.repository.findOne({ where: { name } });
+  async findByUsername(username: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({ where: { username } });
 
     return user;
   }
@@ -28,5 +28,11 @@ export class UsersRepository implements IUsersRepository {
     const user = await this.repository.findOne(id);
 
     return user;
+  }
+
+  async list(): Promise<User[]> {
+    const users = await this.repository.find();
+
+    return users;
   }
 }

@@ -3,6 +3,7 @@ import { User } from '../infra/typeorm/entities/User';
 
 export interface IUsersRepository {
   create(data: ICreateUserDTO): Promise<User>;
-  findByName(name: string): Promise<User | undefined>;
+  findByUsername(username: string): Promise<User | undefined>;
   findById(id: string): Promise<User | undefined>;
+  list(): Promise<User[]>;
 }

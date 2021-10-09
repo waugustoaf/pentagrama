@@ -3,23 +3,25 @@ import { AppError } from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  name: string;
+  username: string;
   password: string;
 }
 
 @injectable()
-export class CreateCarUseCase {
+export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
 
   async execute(data: IRequest) {
-    if (!data.name || !data.password) {
-      throw new AppError('Name and password are required.');
+    if (!data.username || !data.password) {
+      throw new AppError('Username and password are required.');
     }
 
-    const userAlreadyExists = await this.usersRepository.findByName(data.name);
+    const userAlreadyExists = await this.usersRepository.findByUsername(
+      data.username,
+    );
 
     if (userAlreadyExists) {
       throw new AppError('User already exists!');

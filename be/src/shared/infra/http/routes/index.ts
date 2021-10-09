@@ -1,6 +1,11 @@
+import GetUserInfoController from '@modules/users/useCases/getUserInfo/GetUserInfoController';
 import { Router } from 'express';
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
+import { authenticateRoutes } from './authenticate.routes';
 import { usersRoutes } from './users.routes';
 
 export const routes = Router();
 
+routes.get('/me', ensureAuthenticated, GetUserInfoController.handle);
 routes.use('/users', usersRoutes);
+routes.use('/', authenticateRoutes);

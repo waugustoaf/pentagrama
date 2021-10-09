@@ -10,6 +10,8 @@ export class CreateOffices1633798128557 implements MigrationInterface {
           { name: 'name', type: 'varchar' },
           { name: 'description', type: 'varchar' },
           { name: 'address', type: 'varchar' },
+          { name: 'updated_at', type: 'timestamp', default: 'now()' },
+          { name: 'created_at', type: 'timestamp', default: 'now()' },
         ],
       }),
     );
