@@ -5,7 +5,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 export const peopleRoutes = Router();
 
-peopleRoutes.get('/', ListPeopleController.handle);
+peopleRoutes.get('/', ensureAuthenticated, ListPeopleController.handle);
 peopleRoutes.post(
   '/',
   ensureAuthenticated,

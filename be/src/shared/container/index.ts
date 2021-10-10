@@ -1,4 +1,6 @@
+import { OfficeCostsRepository } from '@modules/offices/infra/typeorm/repositories/OfficeCostsRepository';
 import { OfficesRepository } from '@modules/offices/infra/typeorm/repositories/OfficesRepository';
+import { IOfficeCostsRepository } from '@modules/offices/repositories/IOfficeCostsRepository';
 import { IOfficesRepository } from '@modules/offices/repositories/IOfficesRepository';
 import { IPeopleRepository } from '@modules/people/infra/repositories/IPeopleRepository';
 import { PeopleRepository } from '@modules/people/infra/typeorm/repositories/PeopleRepository';
@@ -26,4 +28,9 @@ container.registerSingleton<IProfessionTypesRepository>(
 container.registerSingleton<IPeopleRepository>(
   'PeopleRepository',
   PeopleRepository,
+);
+
+container.registerSingleton<IOfficeCostsRepository>(
+  'OfficeCostsRepository',
+  OfficeCostsRepository,
 );

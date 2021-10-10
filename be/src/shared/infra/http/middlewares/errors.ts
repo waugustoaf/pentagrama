@@ -12,6 +12,7 @@ export const errors = (
       .status(err.statusCode)
       .json({ status: 'Error', message: err.message });
   } else {
+    console.log(err);
     return response.status(500).json({
       status: 'Error',
       message: `INTERNAL SERVER ERROR (${err.message})`,
