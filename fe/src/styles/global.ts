@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  :root {
+    --toastify-color-progress-success: ${props =>
+      props.theme.colors.primary.main};
+    --toastify-icon-color-success: ${props => props.theme.colors.primary.main};
+  }
+  
   * {
     margin: 0;
     padding: 0;

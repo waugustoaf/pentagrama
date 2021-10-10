@@ -31,9 +31,10 @@ export class RegisterCostsUseCase {
     const monthAlreadyRegistered = await this.officeCostsRepository.getByMonth({
       month,
       year,
+      officeId: registers[0]?.officeId ?? '123',
     });
 
-    if (monthAlreadyRegistered) {
+    if (monthAlreadyRegistered.length > 0) {
       throw new AppError('Month costs already registered');
     }
 
@@ -84,7 +85,7 @@ export class RegisterCostsUseCase {
 
         if (
           !!person &&
-          person.hours + register.hours >= 160 &&
+          Number(person.hours) + Number(register.hours) >= 160 &&
           !erroredPeople.some((item) => item.person_id === person.person_id)
         ) {
           erroredPeople.push(person);
@@ -103,7 +104,6 @@ export class RegisterCostsUseCase {
 
       return response;
     } catch (error) {
-      console.log(error);
       throw new AppError('Invalid body sended');
     }
   }

@@ -19,6 +19,11 @@ export interface PeopleMonthHoursRequest {
   year: number;
 }
 
+export interface GetByMonthAndOfficeData {
+  month: number;
+  year: number;
+  officeId: string;
+}
 export interface GetByMonthData {
   month: number;
   year: number;
@@ -28,6 +33,6 @@ export interface IOfficeCostsRepository {
   create(data: ICreateOfficeCostDTO): Promise<OfficeCost>;
   findByPerson(data: FindByPersonData): Promise<OfficeCost[]>;
   getPeopleMonthHours(data: PeopleMonthHoursRequest): Promise<PeopleMonthHours>;
-  getByMonth(data: GetByMonthData): Promise<OfficeCost[]>;
+  getByMonth(data: GetByMonthAndOfficeData): Promise<OfficeCost[]>;
   getOfficeMonthCosts(data: GetByMonthData): Promise<OfficeMonthCosts[]>;
 }

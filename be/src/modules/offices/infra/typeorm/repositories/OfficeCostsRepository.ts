@@ -1,11 +1,12 @@
 import { ICreateOfficeCostDTO } from '@modules/offices/dtos/ICreateOfficeCostDTO';
 import {
   FindByPersonData,
-  IOfficeCostsRepository,
-  PeopleMonthHoursRequest,
-  PeopleMonthHours,
+  GetByMonthAndOfficeData,
   GetByMonthData,
+  IOfficeCostsRepository,
   OfficeMonthCosts,
+  PeopleMonthHours,
+  PeopleMonthHoursRequest,
 } from '@modules/offices/repositories/IOfficeCostsRepository';
 import { getRepository, Repository } from 'typeorm';
 import { OfficeCost } from '../entities/OfficeCost';
@@ -46,13 +47,17 @@ export class OfficeCostsRepository implements IOfficeCostsRepository {
       [month, year],
     );
 
-    console.log(peopleMonthHours);
-
     return peopleMonthHours;
   }
 
-  async getByMonth({ month, year }: GetByMonthData): Promise<OfficeCost[]> {
-    return await this.repository.find({ where: [{ month }, { year }] });
+  async getByMonth({
+    month,
+    year,
+    officeId,
+  }: GetByMonthAndOfficeData): Promise<OfficeCost[]> {
+    return await this.repository.find({
+      where: `month = ${month} AND year = ${year} AND office_id = '${officeId}'`,
+    });
   }
 
   async getOfficeMonthCosts({
@@ -67,8 +72,7 @@ export class OfficeCostsRepository implements IOfficeCostsRepository {
         INNER JOIN people p ON p.id = oc.person_id
         INNER JOIN profession_types pt ON pt.id = p.profession_type_id
         WHERE oc.month = $1 AND oc.year = $2
-        GROUP BY oc.office_id, office.id
-        LIMIT 1;
+        GROUP BY oc.office_id, office.id;
       `,
       [month, year],
     );
