@@ -7,9 +7,31 @@ export const Container = styled.div`
   background-color: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
 
-  > span {
-    font-weight: bold;
-    font-size: 1.125rem;
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    > span {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+
+    > a {
+      text-decoration: none;
+      font-size: 0.6rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: ${props => props.theme.colors.primary.main};
+      transition: all 0.2s;
+
+      &:hover {
+        color: ${props => props.theme.colors.primary.light};
+      }
+
+      &:active {
+        color: ${props => props.theme.colors.primary.dark};
+      }
+    }
   }
 
   > p {

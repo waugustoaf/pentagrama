@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { OfficeDTO } from '../../dtos/OfficeDTO';
 import { Container } from './styles';
 
@@ -8,7 +9,12 @@ interface OfficeCardProps {
 export const OfficeCard = ({ office }: OfficeCardProps) => {
   return (
     <Container>
-      <span>{office.name}</span>
+      <div>
+        <span>{office.name}</span>
+        <Link href={`/office/register-costs/${office.id}`}>
+          <a>Registrar custos</a>
+        </Link>
+      </div>
       <p>{office.description}</p>
     </Container>
   );

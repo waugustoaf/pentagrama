@@ -12,6 +12,7 @@ export const theme = {
     gray: {
       900: '#222222',
       200: '#bcbcbc',
+      100: '#dddddd',
     },
     danger: {
       light: '#f97171',

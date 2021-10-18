@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next';
+import Link from 'next/link';
 import { parseCookies, destroyCookie } from 'nookies';
+import { ErrorCard } from '../components/ErrorCard';
 import { OfficeCard } from '../components/OfficeCard';
 import { OfficeCostCard } from '../components/OfficeCostCard';
 import { OfficeCostsPerMonthDTO } from '../dtos/OfficeCostsPerMonthDTO';
@@ -20,19 +22,36 @@ const Home = ({ lastMonthOfficesCosts, offices }: HomeProps) => {
       </header>
 
       <div>
-        <h2>Lançamentos desse mês</h2>
-        <div className='last-offices-costs'>
-          {lastMonthOfficesCosts.map(officeCost => (
-            <OfficeCostCard key={officeCost.id} officeCost={officeCost} />
-          ))}
-        </div>
+        {lastMonthOfficesCosts.length !== 0 && (
+          <>
+            <h2>Lançamentos desse mês</h2>
+            <div className='last-offices-costs'>
+              {lastMonthOfficesCosts.map(officeCost => (
+                <OfficeCostCard key={officeCost.id} officeCost={officeCost} />
+              ))}
+            </div>
+          </>
+        )}
 
-        <h2>Escritórios cadastrados</h2>
+        <div className='office-header'>
+          <h2>Escritórios</h2>
+
+          <Link href='office/create'>
+            <a>Novo escritório</a>
+          </Link>
+        </div>
         <div className='offices-list'>
           {offices.map(office => (
             <OfficeCard key={office.id} office={office} />
           ))}
         </div>
+        {offices.length === 0 && (
+          <ErrorCard
+            message='Nenhum escritório cadastrado!'
+            actionText='Cadastrar escritório'
+            href='/office/create'
+          />
+        )}
       </div>
     </Container>
   );

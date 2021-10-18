@@ -8,7 +8,8 @@ import { Input } from '../../../components/Input';
 import { OfficeDTO } from '../../../dtos/OfficeDTO';
 import { PersonDTO } from '../../../dtos/PersonDTO';
 import { api } from '../../../services/api';
-import { Container } from '../../../styles/pages/register-costs';
+import { Container } from '../../../styles/pages/office/register-costs';
+import { destroyCookie } from 'nookies';
 
 interface RegisterCostsProps {
   people: PersonDTO[];
@@ -128,6 +129,12 @@ const RegisterCosts = ({ people, office }: RegisterCostsProps) => {
 
         return;
       }
+
+      if (err.response.status === 401) {
+        destroyCookie(null, '@OfficeCosts:token');
+        return router.push('/');
+      }
+
       toast.error('Não foi possível salvar o lançamento. Lembre-se das regras');
       return;
     }
